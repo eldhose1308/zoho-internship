@@ -10,6 +10,7 @@ public class Browser {
 	private static String[] visitedUrls = new String[VISITEDURLS_SIZE];
 	private static int visitedUrlsSize = -1;
 
+	
 	public Browser() {
 //		System.out.println("New Browser instance added");
 	}
@@ -81,9 +82,9 @@ public class Browser {
 		
 		String[] historyUrls2 = {"www.facebook.com","www.twitter.com"};
 		Browser chrome = new Browser(historyUrls2);
-	
+	    
 		chrome.addNewUrl("www.zoho.com");
-
+		
 		
 		System.out.println("Browser 1 :");
 		firefox.getHistory();

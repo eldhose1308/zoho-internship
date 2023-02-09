@@ -1,4 +1,6 @@
 import java.util.ArrayList;  
+import java.util.Collections;
+import java.util.List;
 
 class Browsers {
 	private ArrayList<String> history = new ArrayList<>();
@@ -57,6 +59,10 @@ class GoogleChrome extends Browsers{
 		this.isMicrophoneAccessible = false;
 	}
 	
+	public GoogleChrome(ArrayList<String> history) {
+		super(history);
+	}
+	
 	public void whoAmI() {
 		System.out.println("I am Google Chrome");
 	}
@@ -77,9 +83,18 @@ class GoogleChrome extends Browsers{
 
 
 class Firefox extends Browsers implements MultipleAccountContainers{
-	ArrayList<String> containers = new ArrayList<String>();
+	List<String> containers = new ArrayList<String>();
+	
 	public Firefox() {
 		super();
+	}
+
+	public Firefox(ArrayList<String> history) {
+		super(history);
+	}
+	
+	public void new_method() {
+		System.out.println("Helloo");
 	}
 	
 	public void whoAmI() {
@@ -92,7 +107,8 @@ class Firefox extends Browsers implements MultipleAccountContainers{
 	
 
 	public void leaveContainer(String container) {
-		containers.remove(container);
+//		containers.remove(container);
+		containers.removeAll(Collections.singleton(container));
 	}
 	
 
@@ -121,26 +137,33 @@ public class OtherBrowsers {
 		googleChrome.whoAmI();
 		
 		
+		//5
+		googleChrome.setPermissions(true);
+		googleChrome.setPermissions(true, false, true);
+		
+		
 		//6
+
 		Browsers tabOne = new Firefox();
 		Browsers tabTwo = new Firefox();
 		Browsers tabThree = new Firefox();
 		Browsers tabFour = new GoogleChrome();
 		Browsers tabFive = new GoogleChrome();
 		
-		Browsers[] allBrowsers = new Browsers[5];
+//		Browsers[] allBrowsers = new Browsers[5];		
 		
-		allBrowsers[0] = tabOne;
-		allBrowsers[1] = tabTwo;
-		allBrowsers[2] = tabThree;
-		allBrowsers[3] = tabFour;
-		allBrowsers[4] = tabFive;
+//		allBrowsers[0] = tabOne;
+//		allBrowsers[1] = tabTwo;
+//		allBrowsers[2] = tabThree;
+//		allBrowsers[3] = tabFour;
+//		allBrowsers[4] = tabFive;
 		
+		Browsers[] allBrowsers = {tabOne,tabTwo,tabThree,tabFour,tabFive};
 		
-		for(int i = 0; i < 5; i++) {
-			firefoxCount = (allBrowsers[i] instanceof Firefox) ? ++firefoxCount : firefoxCount;
-			chromeCount = (allBrowsers[i] instanceof GoogleChrome) ? ++chromeCount : chromeCount;
-
+		for(Browsers allBrowser : allBrowsers) {
+			firefoxCount = (allBrowser instanceof Firefox) ? ++firefoxCount : firefoxCount;
+			chromeCount = (allBrowser instanceof GoogleChrome) ? ++chromeCount : chromeCount;
+		
 		}
 		
 		System.out.println("\n-------------------\n");
@@ -149,6 +172,9 @@ public class OtherBrowsers {
 		
 		
 		
+		//7 ???
+		MultipleAccountContainers mac = new Firefox();
+		mac.addContainer("sampleContainer");
 		//7
 		Browsers browser= new Firefox();
 		((Firefox)browser).addContainer("facebookContainer"); 
