@@ -79,6 +79,22 @@ class GoogleChrome extends Browsers{
 		this.isMicrophoneAccessible = status;
 	}
 	
+	public String getVersionNumber() {
+		return this.versionNumber;
+	}
+	
+	public boolean getIsLocationAccessible() {
+		return this.isLocationAccessible;
+	}
+	
+	public boolean getIsCameraAccessible() {
+		return this.isCameraAccessible;
+	}
+	
+	public boolean getIsMicrophoneAccessible() {
+		return this.isMicrophoneAccessible;
+	}
+	
 }
 
 
@@ -137,6 +153,18 @@ public class OtherBrowsers {
 		googleChrome.whoAmI();
 		
 		
+		//4
+		//5
+		System.out.println("\n-------------------\n");
+		System.out.println("Google Chrome details\n");
+		System.out.println("Location Access : " + googleChrome.getIsLocationAccessible());
+		System.out.println("Camera Access : " + googleChrome.getIsCameraAccessible());
+		System.out.println("Micophone Access : " + googleChrome.getIsMicrophoneAccessible());
+		
+		System.out.println("Version No : " + googleChrome.getVersionNumber());
+
+		
+		
 		//5
 		googleChrome.setPermissions(true);
 		googleChrome.setPermissions(true, false, true);
@@ -175,6 +203,8 @@ public class OtherBrowsers {
 		//7 ???
 		MultipleAccountContainers mac = new Firefox();
 		mac.addContainer("sampleContainer");
+		
+		
 		//7
 		Browsers browser= new Firefox();
 		((Firefox)browser).addContainer("facebookContainer"); 
