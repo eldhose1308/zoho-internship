@@ -3,9 +3,10 @@ import java.util.*;
 
 
 class Browsers {
-	private HashMap<String,Integer> history = new HashMap<String,Integer>();
+	private ArrayList<String> history = new ArrayList<String>();
 	private static ArrayList<String> visitedUrls = new ArrayList<>();
 	
+	private String delimitHistory = "##";
 	
 	public Browsers() {	
 	}
@@ -15,52 +16,74 @@ class Browsers {
 		this.setHistory(history);
 	}
 	
+	public void setHistory(String history) {
+		int visitCount = 1;
+		int index = 0;
+		String urlString,urlCount;
+		boolean urlFound = false;
+		
+		for(String url : this.history) {
+			
+			urlString = url.split(delimitHistory)[0];
+			urlCount = url.split(delimitHistory)[1];
+
+
+			if(history.equals(urlString)) {
+				visitCount = Integer.parseInt(urlCount) + 1;
+				this.history.set(index, urlString + delimitHistory + visitCount);
+				urlFound = true;
+			}
+
+			index++;
+			
+		}
+		
+		if(!urlFound)
+			this.history.add(history + delimitHistory + visitCount);
+		
+
+	}
+	
+	
 	public void setHistory(ArrayList<String> history) {
 		for(String url : history) {
-			if(this.history.containsKey(url))
-				this.history.put(url,this.history.get(url) + 1);
-			else
-				this.history.put(url, 1);
-			this.getAllVisitUrlDetails();
+			this.setHistory(url);
 		}
 		
 		this.setVisitedUrls(history);		
 	}
 	
+	
 	public void visitUrl(String url) {
-		ArrayList<String> newUrl = new ArrayList<String>(Arrays.asList(url));
-		this.setHistory(newUrl);
-//		this.getVisitUrlDetails(url);
+		this.setHistory(url);
 	}
 	
-	
-	public int getVisitUrlCount(String url) {
-		return this.history.get(url);
-	}
-	
-	public void getVisitUrlDetails(String url) {
-		System.out.println("\nVisited "+url + "    ## " + this.getVisitUrlCount(url)+"\n");
-	}
+		
 	
 
 	public void getAllVisitUrlDetails() {
 		System.out.println("\n-------------------");
-		 for (Map.Entry<String,Integer> url : this.history.entrySet()) {
-				System.out.println("Visited "+url.getKey() + "    ## " + url.getValue());
-	      }
+		for (String url : this.history) {
+			System.out.println(url);
+		}
 		
 		System.out.println("-------------------\n");
 
 	}
 	
 	
-	public HashMap<String,Integer> getHistory(){
+	public ArrayList<String> getHistory(){
 		return history;
 	}
 	
 	public void setVisitedUrls(ArrayList<String> new_visitedUrls) {
 		for(String newUrls : new_visitedUrls)
-			visitedUrls.add(newUrls);
+			setVisitedUrls(newUrls);
+	}
+	
+	
+	public void setVisitedUrls(String url) {
+		visitedUrls.add(url);
 	}
 	
 	public static ArrayList<String> getVisitedUrls() { 
@@ -216,14 +239,7 @@ public class OtherBrowsers {
 		Browsers tabFive = new GoogleChrome();
 		
 		
-		
-//		Browsers[] allBrowsers = new Browsers[5];		
-		
-//		allBrowsers[0] = tabOne;
-//		allBrowsers[1] = tabTwo;
-//		allBrowsers[2] = tabThree;
-//		allBrowsers[3] = tabFour;
-//		allBrowsers[4] = tabFive;
+
 		
 		Browsers[] allBrowsers = {tabOne,tabTwo,tabThree,tabFour,tabFive};
 		
@@ -298,14 +314,11 @@ public class OtherBrowsers {
 
         Browsers browser1 = new Browsers(urls);
         
-        HashMap<String,Integer> history1 = browser1.getHistory();
-//		System.out.println("Browser 1 :");
-//        for (Map.Entry<String,Integer> url : history1.entrySet()) {
-//            System.out.println(url.getKey() + "    ## " + url.getValue());
-//        }
-//		browser1.getAllVisitUrlDetails();
-//		System.out.println("\n-------------------\n");
-
+        ArrayList<String> history1 = browser1.getHistory();
+		System.out.println("Browser 1 :");
+		browser1.getAllVisitUrlDetails();
+		
+		
 		
         urls.removeAll(urls);
 		
@@ -320,15 +333,13 @@ public class OtherBrowsers {
         
         // Exercise 4
         browser2.visitUrl("www.instagram.com");
+        browser2.visitUrl("www.google.com");
+        browser2.visitUrl("www.twitter.com");
         
         
-        HashMap<String,Integer> history2 = browser2.getHistory();
-//		System.out.println("Browser 2 :");
-//		  for (Map.Entry<String,Integer> url : history2.entrySet()) {
-//	            System.out.println(url.getKey() + "    ##   " + url.getValue());
-//	        }
-//		browser2.getAllVisitUrlDetails();
-//		System.out.println("\n-------------------\n");
+        ArrayList<String> history2 = browser2.getHistory();
+		System.out.println("Browser 2 :");
+		browser2.getAllVisitUrlDetails();
 
         
         
