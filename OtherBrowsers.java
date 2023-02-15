@@ -15,45 +15,53 @@ class Browsers {
 		this.setHistory(history);
 	}
 	
-	
 	public void setHistory(ArrayList<String> history) {
 		for(String url : history) {
 			if(this.history.containsKey(url))
 				this.history.put(url,this.history.get(url) + 1);
 			else
 				this.history.put(url, 1);
-//			getVisitUrlDetails(url);
+			this.getAllVisitUrlDetails();
 		}
 		
 		this.setVisitedUrls(history);		
 	}
 	
-	
 	public void visitUrl(String url) {
 		ArrayList<String> newUrl = new ArrayList<String>(Arrays.asList(url));
 		this.setHistory(newUrl);
-		this.getVisitUrlDetails(url);
+//		this.getVisitUrlDetails(url);
 	}
+	
 	
 	public int getVisitUrlCount(String url) {
 		return this.history.get(url);
 	}
 	
-	
 	public void getVisitUrlDetails(String url) {
 		System.out.println("\nVisited "+url + "    ## " + this.getVisitUrlCount(url)+"\n");
 	}
+	
+
+	public void getAllVisitUrlDetails() {
+		System.out.println("\n-------------------");
+		 for (Map.Entry<String,Integer> url : this.history.entrySet()) {
+				System.out.println("Visited "+url.getKey() + "    ## " + url.getValue());
+	      }
+		
+		System.out.println("-------------------\n");
+
+	}
+	
 	
 	public HashMap<String,Integer> getHistory(){
 		return history;
 	}
 	
-	
 	public void setVisitedUrls(ArrayList<String> new_visitedUrls) {
 		for(String newUrls : new_visitedUrls)
 			visitedUrls.add(newUrls);
 	}
-	
 	
 	public static ArrayList<String> getVisitedUrls() { 
 		return visitedUrls;
@@ -291,12 +299,14 @@ public class OtherBrowsers {
         Browsers browser1 = new Browsers(urls);
         
         HashMap<String,Integer> history1 = browser1.getHistory();
-		System.out.println("Browser 1 :");
-        for (Map.Entry<String,Integer> url : history1.entrySet()) {
-            System.out.println(url.getKey() + "    ## " + url.getValue());
-        }
-		System.out.println("\n-------------------\n");
+//		System.out.println("Browser 1 :");
+//        for (Map.Entry<String,Integer> url : history1.entrySet()) {
+//            System.out.println(url.getKey() + "    ## " + url.getValue());
+//        }
+//		browser1.getAllVisitUrlDetails();
+//		System.out.println("\n-------------------\n");
 
+		
         urls.removeAll(urls);
 		
         urls.add("www.google.com");
@@ -307,15 +317,18 @@ public class OtherBrowsers {
         Browsers browser2 = new Browsers();
         browser2.setHistory(urls);
 
+        
+        // Exercise 4
         browser2.visitUrl("www.instagram.com");
         
         
         HashMap<String,Integer> history2 = browser2.getHistory();
-		System.out.println("Browser 2 :");
-		  for (Map.Entry<String,Integer> url : history2.entrySet()) {
-	            System.out.println(url.getKey() + "    ##   " + url.getValue());
-	        }
-		System.out.println("\n-------------------\n");
+//		System.out.println("Browser 2 :");
+//		  for (Map.Entry<String,Integer> url : history2.entrySet()) {
+//	            System.out.println(url.getKey() + "    ##   " + url.getValue());
+//	        }
+//		browser2.getAllVisitUrlDetails();
+//		System.out.println("\n-------------------\n");
 
         
         
