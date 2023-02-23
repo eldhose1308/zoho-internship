@@ -95,6 +95,44 @@ class Browsers {
 		System.out.println("I am a browser");
 	}
 	
+	
+	
+	// Member Inner Class
+	class Bookmarks{
+		ArrayList<String> bookmarks = new ArrayList<String>();
+		
+		public void setBookmarks(String bookmark) {
+			this.bookmarks.add(bookmark);
+		}
+		
+		public String[] getBookmarks() {
+			int bookmarkSize = bookmarks.size();
+			String[] allBookmarks = new String[bookmarkSize];
+			for(int i = 0; i < bookmarkSize; i++)
+				allBookmarks[i] = bookmarks.get(i);
+			
+			return allBookmarks;	
+		}
+		
+	}
+	
+	
+	
+	
+	// Static Inner Class
+	static class History{
+		public void display() {
+			System.out.println("Inside static history class");
+		}
+	}
+	
+}
+
+
+
+// Anonymous Inner Class
+abstract class Shortcuts{
+	abstract void display();
 }
 
 
@@ -213,6 +251,42 @@ public class OtherBrowsers {
 		googleChrome.whoAmI();
 		
 		
+		
+		
+		
+		
+		// Exercise 5
+		Browsers.Bookmarks bookmarks = browsers.new Bookmarks();
+		bookmarks.setBookmarks("www.zoho.com");
+		bookmarks.setBookmarks("www.github.com");
+
+		
+		
+		System.out.println("\n-------------------\n");
+		String[] bookmarksList = bookmarks.getBookmarks();
+		System.out.println("Bookmarks are :");
+        for (String url : bookmarksList) {
+            System.out.println(url);
+        }
+		System.out.println("\n-------------------\n");
+		
+		
+		
+		Browsers.History history = new Browsers.History();
+		history.display();
+		
+		
+		Shortcuts shortcuts1 = new Shortcuts() {
+			void display() {
+				System.out.println("Inside Anonymous Shortcut class");
+			}
+		};
+		
+		shortcuts1.display();
+		
+		
+		
+		
 		//4
 		//5
 		System.out.println("\n-------------------\n");
@@ -231,7 +305,6 @@ public class OtherBrowsers {
 		
 		
 		//6
-
 		Browsers tabOne = new Firefox();
 		Browsers tabTwo = new Firefox();
 		Browsers tabThree = new Firefox();
