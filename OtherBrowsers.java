@@ -207,9 +207,6 @@ class Firefox extends Browsers implements MultipleAccountContainers{
 		super(history);
 	}
 	
-	public void new_method() {
-		System.out.println("Helloo");
-	}
 	
 	public void whoAmI() {
 		System.out.println("I am Firefox");
@@ -236,6 +233,90 @@ class Firefox extends Browsers implements MultipleAccountContainers{
 	}
 }
 
+
+/***************************************/
+
+
+class InvalidURLException extends Exception{
+	public InvalidURLException(String errorMessage) {
+		super(errorMessage);
+	}
+}
+
+
+class NoHistoryFoundException  extends Exception{
+	public NoHistoryFoundException(String errorMessage) {
+		super(errorMessage);
+	}
+}
+
+
+
+class InvalidPositionException  extends Exception{
+	public InvalidPositionException(String errorMessage) {
+		super(errorMessage);
+	}
+}
+
+
+class BrowserHistory{
+	
+	ArrayList<String> history = new ArrayList<String>();
+	int currentIdx;
+	
+	public BrowserHistory(String homepage) {
+		currentIdx = -1;
+		try {
+			this.visit(homepage);
+		}catch(InvalidURLException iue) {
+			System.out.println(iue.getMessage());
+		}
+	}
+	
+	public void visit(String url) throws InvalidURLException  {		
+		if(!url.endsWith(".com") && !url.endsWith(".in") && !url.endsWith(".org")) {
+			throw new InvalidURLException("Invalid url extension"); 
+		}
+		history.add(url);
+		currentIdx++;
+	}
+	
+	public String back(int steps) throws NoHistoryFoundException {
+		if((currentIdx - steps) < 0) {
+			throw new NoHistoryFoundException("No History Found");
+		}
+		currentIdx -= steps;
+		return history.get(currentIdx);
+	}
+	
+	public String forward(int steps) throws NoHistoryFoundException {
+		if((currentIdx + steps) >= history.size()) {
+			throw new NoHistoryFoundException("No History Found");
+		}
+		currentIdx += steps;
+		return history.get(currentIdx);
+	}
+	
+	public String get(int position) throws InvalidPositionException {
+		if(position < 0) {
+			throw new InvalidPositionException("Provide only positive values");
+		}
+		
+		if(position > history.size()) {
+			throw new ArrayIndexOutOfBoundsException("Invalid Position");
+		}
+		return history.get(position - 1);
+		
+	}
+}
+
+
+/***************************************/
+
+
+
+
+
 public class OtherBrowsers {
 
 	public static void main(String[] args) {
@@ -259,7 +340,7 @@ public class OtherBrowsers {
 		Browsers.Bookmarks bookmarks = browsers.new Bookmarks();
 		bookmarks.setBookmarks("www.zoho.com");
 		bookmarks.setBookmarks("www.github.com");
-
+		
 		
 		
 		System.out.println("\n-------------------\n");
@@ -283,6 +364,81 @@ public class OtherBrowsers {
 		};
 		
 		shortcuts1.display();
+		
+		
+		
+		// Exercise 6
+		Scanner scanner = new Scanner(System.in);
+		int choice = 0, steps;
+		String userUrl, currentUrl;
+
+		
+		BrowserHistory browserHistory = new BrowserHistory("www.bing.com");
+		System.out.println("-------------------");
+		System.out.println("(1): Visit new url\t (2): Go Back steps\t(3): Go Forward steps\t(4): Get\t(5): Exit\t");
+		System.out.println("-------------------");
+		
+		choice = scanner.nextInt();
+		do {
+			System.out.println("-------------------");
+			System.out.println("(1): Visit new url\t (2): Go Back steps\t(3): Go Forward steps\t(4): Get\t(5): Exit\t");
+			System.out.println("-------------------");
+			choice = scanner.nextInt();
+			System.out.println("Selected choice is : " + choice);
+
+			
+			switch(choice) {
+				case 1:
+					System.out.print("\n-- Enter url to visit -- \t");
+					userUrl = scanner.next();
+					try {
+						browserHistory.visit(userUrl);
+						System.out.println("Current URL is : " + userUrl);
+					}catch(InvalidURLException iue) {
+						System.out.println(iue.getMessage());
+					}
+					break;
+					
+				case 2:
+					System.out.print("\n-- Enter steps to go back -- \t");
+					steps = scanner.nextInt();
+					try {
+						currentUrl = browserHistory.back(steps);
+						System.out.println(currentUrl);
+					}catch(NoHistoryFoundException nhfe) {
+						System.out.println(nhfe.getMessage());
+					}
+					break;
+					
+				case 3:
+					System.out.print("\n-- Enter steps to go forward -- \t");
+					steps = scanner.nextInt();
+					try {
+						currentUrl = browserHistory.forward(steps);
+						System.out.println(currentUrl);
+					}catch(NoHistoryFoundException nhfe) {
+						System.out.println(nhfe.getMessage());
+					}
+					break;
+					
+				case 4:
+					System.out.print("\n-- Enter position to visit from history -- \t");
+					int position = scanner.nextInt();
+					try {
+						System.out.println("Browser URL at position : " + position + " : " + browserHistory.get(position));
+					}catch(InvalidPositionException ipe) {
+						System.out.println(ipe.getMessage());
+					}
+					break;
+					
+				default:
+					System.out.println("\n-- Invalid Choice !! -- \n");
+					break;
+					
+			}
+			
+		}while(choice != 5);
+		scanner.close();
 		
 		
 		
