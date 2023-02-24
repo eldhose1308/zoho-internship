@@ -298,14 +298,24 @@ class BrowserHistory{
 	}
 	
 	public String get(int position) throws InvalidPositionException {
+		String url = "";
 		if(position < 0) {
 			throw new InvalidPositionException("Provide only positive values");
 		}
 		
-		if(position > history.size()) {
-			throw new ArrayIndexOutOfBoundsException("Invalid Position");
+		try {
+			url = history.get(position - 1);
+		}catch(IndexOutOfBoundsException aiobe) {
+			System.out.println("Invalid Position");
 		}
-		return history.get(position - 1);
+
+		return url;
+		
+//		if(position > history.size()) {
+//			throw new ArrayIndexOutOfBoundsException("Invalid Position");
+//		}
+		
+		
 		
 	}
 }
@@ -369,21 +379,21 @@ public class OtherBrowsers {
 		
 		// Exercise 6
 		Scanner scanner = new Scanner(System.in);
-		int choice = 0, steps;
+		int choice = 1, steps;
 		String userUrl, currentUrl;
 
 		
+		// Adding Home page to BrowserHistory
 		BrowserHistory browserHistory = new BrowserHistory("www.bing.com");
-		System.out.println("-------------------");
-		System.out.println("(1): Visit new url\t (2): Go Back steps\t(3): Go Forward steps\t(4): Get\t(5): Exit\t");
-		System.out.println("-------------------");
-		
-		choice = scanner.nextInt();
+
 		do {
 			System.out.println("-------------------");
 			System.out.println("(1): Visit new url\t (2): Go Back steps\t(3): Go Forward steps\t(4): Get\t(5): Exit\t");
 			System.out.println("-------------------");
+			
 			choice = scanner.nextInt();
+			
+			
 			System.out.println("Selected choice is : " + choice);
 
 			
