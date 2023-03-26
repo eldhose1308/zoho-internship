@@ -1,3 +1,6 @@
+package Hack;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 
@@ -64,6 +67,7 @@ class BrowserHistorys {
 	public void deleteHistory(String extension) {
 		historyList.removeIf(history -> history.endsWith(extension));
 		historyMap.put(extension, historyList);
+		
 	}
 
 	public ArrayList<String> fetchHistory() {
@@ -110,14 +114,31 @@ class BrowserHistorys {
 	}
 
 	public int size(String extension) {
-		int historySize = historyMap.get(extension).size();
+		int historySize = 0;
+		
+		try {
+			historySize = historyMap.get(extension).size();
+		}catch(NullPointerException npe) {
+			System.out.println("No History found on the extension " + extension);
+			historySize = 0;
+		}
 		
 		return historySize;
 	}
 	
 	
 	public void updateHistory(int index,String url) {
-		historyList.set(index,url);
+		try {
+			historyList.set(index,url);
+		}catch(IndexOutOfBoundsException iobe) {
+			System.out.println("No index found ");
+		}catch(Exception npe) {
+			System.out.println("No index found ");
+		}
+		
+		String extension = url.split("\\.")[url.split("\\.").length - 1];
+		historyMap.put(extension, historyList);
+		
 	}
 	
 	
@@ -248,6 +269,18 @@ public class CollectionExercise {
 					tempUrl = scanner.next();
 					browserHistorys.updateHistory(index, tempUrl);
 					break;
+					
+				//case 12:
+				//	browserHistorys.writeHistoryFile(browserHistorys.fetchHistory());
+				//	break;
+					
+					
+				//case 13:
+				//	allUrls = browserHistorys.readHistoryFile();
+				//	for(String url : allUrls) 
+				//		System.out.println(url);
+					
+				//	break;
 					
 				default:
 					System.out.println("\n-- Invalid Choice !! -- \n");
