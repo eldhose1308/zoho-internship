@@ -65,9 +65,8 @@ class BrowserHistorys {
 	
 	
 	public void deleteHistory(String extension) {
+		historyMap.remove(extension);
 		historyList.removeIf(history -> history.endsWith(extension));
-		historyMap.put(extension, historyList);
-		
 	}
 
 	public ArrayList<String> fetchHistory() {

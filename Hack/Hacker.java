@@ -45,12 +45,14 @@ public class Hacker {
             FileReader reader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(reader);
             String line;
-            while ((line = bufferedReader.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) 
                 modifiedHistoryList.add(line);
-            }
+            
             bufferedReader.close();
 		}catch(IOException ioe) {
             System.out.println(ioe.getMessage());
+		}catch(Exception e) {
+            System.out.println(e.getMessage());
 		}
 		
 		return modifiedHistoryList;
