@@ -1,10 +1,10 @@
 package Hack;
 
 import java.util.*;
+import java.lang.reflect.*;
 
 class HistoryReader implements Runnable{
 	Browser browser;
-	
 	
 	public HistoryReader(Browser browser) {
 		this.browser = browser;
@@ -13,13 +13,11 @@ class HistoryReader implements Runnable{
 	
 	public void run() {
 		System.out.println("Reader");
+
 		try {
-			ArrayList<String> history = browser.getHistory();
-			System.out.println(history.size());
-			
-		
+			browser.getHistory();
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("ReadThread" + e.getMessage());
 		}
 	}
 }
@@ -27,7 +25,6 @@ class HistoryReader implements Runnable{
 
 class HistoryDeleter implements Runnable{
 	Browser browser;
-	
 
 	public HistoryDeleter(Browser browser) {
 		this.browser = browser;
@@ -37,78 +34,103 @@ class HistoryDeleter implements Runnable{
 	public void run() {
 		System.out.println("Deleter");
 		try {
-			browser.clearHistory();
+			browser.deleteHistory();
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("DeleteThread " + e.getMessage());
 		}
 		
 	}
 }
 
-
-
 class Browser{
-	ArrayList<String> history = new ArrayList<String>();
+	private int[] history;
+	private int idx;
+	private int arrSize;
 	
-	public void setHistory(String url) {
-		synchronized(history) {
-			this.history.add(url);
-		}
-    }
-	
-
-	public ArrayList<String> getHistory() {
-        return history;
-    }
-	
-	public void clearHistory() {
-		synchronized(history) {
-			Iterator<String> iterator = history.iterator();
-		    while (iterator.hasNext()) {
-		    	iterator.next();
-		    	iterator.remove();
-			}
-		}
-	
+	public Browser(int[] history) {
+		this.history = history;
+        this.arrSize = history.length;
+		this.idx = 0;
 	}
 	
+	public void setHistory(int url) {
+		if(history.length > idx)
+			this.history[idx++] = url;
+		
+		this.arrSize = history.length;
+	}
 	
+	 public void getHistory() {
+		synchronized(history) {
+			System.out.println("Getting history ");
+			if(arrSize == 0) {
+				System.out.println("No elements to show ");
+				return;
+			}
+			for(int i = 0; i < arrSize; i++) {
+				System.out.println("Showing - " + history[i] + " : " + arrSize);
+			}
+		}
+	}
+	
+	 public void deleteHistory() {
+		synchronized(history) {
+			System.out.println("Deleting history ");
+
+			int tempSize = arrSize;
+			
+			for(int i = 0; i < tempSize; i++) {
+				System.out.println("Deleting - " + history[i] + " : " + arrSize);
+				history[i] = 0;
+				this.arrSize--;
+			}
+		}
+		
+	}
 }
+
 
 public class HistoryThread {
 
 	public static void main(String[] args) {
 
-		Browser browser = new Browser();
-//		String[] visitedUrls = {"google.com","twitter.com","zoho.com"};
+		int capacity = 100;
+		int[] tempArr = new int[capacity];
+		for(int i = 0; i < capacity; i++) 
+			tempArr[i] = (i+1) * 10;
 		
-		for(int i = 0; i < 999; i ++)
-			browser.setHistory(String.valueOf(i));
-		
-	
-		
-		
+		Browser browser = new Browser(tempArr);
+        
 		HistoryReader historyReader = new HistoryReader(browser);
 		HistoryDeleter historyDeleter = new HistoryDeleter(browser);
 
         Thread historyReaderThread = new Thread(historyReader);
         Thread historyDeleterThread = new Thread(historyDeleter);
-
+        
         
         try {
 	        historyReaderThread.start();
-	        historyReaderThread.join();
+
 	        historyDeleterThread.start();
-	        
-	        
-	        
-//	        historyReaderThread.join();
+	        historyDeleterThread.join();
 	        
 //	        historyReaderThread.start();
+// 	        historyReaderThread.join();
 	        
+ 	        
+ 	       Field arrSizeField = Browser.class.getDeclaredField("arrSize");
+ 	       arrSizeField.setAccessible(true);
+ 	       int arrSize =  (Integer) arrSizeField.get(browser);
+ 	        
+	       System.out.println("Final length of array is " + arrSize);
+	        
+        }catch(IllegalThreadStateException itse) {
+        	System.out.println("IllegalThreadStateException " + itse);
         }catch(Exception e) {
-        	System.out.println(e.getMessage());
+        	System.out.println("Exception " + e);
         }
+        
+
         
 	}
 
