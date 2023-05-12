@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Reservation</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        * {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        body {
+            background-color: #111727;
+            color: #ddd;
+        }
+
+        .heading {
+            font-size: 28px;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            padding: 2.5rem;
+            margin: 2%;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .col-12 {
+            flex: 0 0 auto;
+            width: 100%;
+        }
+
+        .col-6 {
+            flex: 0 0 auto;
+            width: 40%;
+            padding: 0 4rem;
+        }
+
+        .form-element {
+            padding: 5px 10px;
+            font-size: 15px;
+            color: #000;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: inline-block;
+            width: 100%;
+            outline: none;
+            height: 28px;
+        }
+
+        select{
+            height: 40px !important;
+        }
+
+        input[type="file"]{
+            border: none;
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+
+        }
+
+        .form-check {
+            padding: 5px 10px;
+            display: inline-block;
+            height: 28px;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .btn {
+            display: inline-block;
+            cursor: pointer;
+            font-size: 15px;
+            padding: 8px 40px;
+        }
+
+        .btn-success {
+            background-color: #24695c;
+            color: #fff;
+            border: 2px solid transparent;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        .btn-outline-success {
+            border: 2px solid #24695c;
+            color: #fff;
+            background: transparent;
+            border-radius: 5px;
+        }
+
+        .btn-outline-success:hover {
+            background-color: #24695c;
+
+        }
+
+        .btn-success:hover {
+            border: 2px solid #24695c;
+            background: transparent;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <div class="container">
+
+        <h3 class="heading center">Train Reservation</h3>
+
+        <form action="" method="get" onsubmit="return false">
+
+
+            <div class="row">
+
+                <div class="col-6">
+
+                    <div class="form-group">
+                        <label for="">Name</label>
+                        <input type="text" name="name" id="name" class="form-element">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Date of Journey</label>
+                        <input type="date" name="date_of_journey" id="date_of_journey" class="form-element">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Aadhar number</label>
+                        <input type="number" name="aadhar_number" id="aadhar_number" class="form-element">
+                    </div>
+
+
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="">Gender</label> <br>
+                        <div class="form-check">
+                            <input type="radio" name="gender" id="gender" value="m" checked>Male
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" name="gender" id="gender" value="f">Female
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Class</label>
+                        <select name="class" id="class" class="form-element">
+                            <option value="1">Sleeper</option>
+                            <option value="2">AC First Class</option>
+                            <option value="3">AC 3 Tier</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="">ID Proof</label>
+                        <input type="file" name="id_proof" id="id_proof" class="form-element">
+                    </div>
+
+
+
+                </div>
+
+                <div class="col-12 center">
+                    <div class="form-group"> <br>
+                        <div class="">
+                            <button type="reset" name="reset_btn" id="reset_btn" class="btn btn-outline-success">Clear
+                                <i class="fa fa-times"></i> </button>
+                            <button type="submit" name="submit_btn" id="submit_btn" class="btn btn-success">Book <i
+                                    class="fa fa-save"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+
+    </div>
+
+
+
+
+</body>
+
+
+
+</html>
