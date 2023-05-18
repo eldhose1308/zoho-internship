@@ -2,12 +2,13 @@
  * 6. Find the word in the array by given the input and return the matches value as list
  */
 function elementPresentArray(arr, element) {
+    element = element.toLowerCase();
     return arr.filter(arrElement => {
-        if (arrElement.includes(element))
+        if (arrElement.toLowerCase().includes(element))
             return arrElement;
     });
 }
 
-let arr = ["Hello", "Trello", "What", "Jelly"];
+let arr = ["Hello", "TrEllo", "What", "Jelly"];
 let element = "ell";
 console.log(elementPresentArray(arr, element));
