@@ -5,7 +5,7 @@ function elementPresentArray(arr, element) {
     return arr.filter(arrElement => {
         if (arrElement.includes(element))
             return arrElement;
-    })
+    });
 }
 
 let arr = ["Hello", "Trello", "What", "Jelly"];

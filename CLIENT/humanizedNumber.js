@@ -7,6 +7,7 @@ function humanizedNumber(number) {
     let unitsPlace = number % 10;
     let suffix = "";
 
+
     // 4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
     if (number > 3 && number < 20)
         suffix = "th";
@@ -21,12 +22,15 @@ function humanizedNumber(number) {
             case 3:
                 suffix = "rd";
                 break;
+            default:
+                suffix = "th";
+
         }
-   
+
 
     humanizedString = number + suffix;
     return humanizedString;
 }
 
-let number = 193;
+let number = 199;
 console.log(humanizedNumber(number))

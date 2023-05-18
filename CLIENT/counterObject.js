@@ -4,13 +4,13 @@
 
 let counterObj = {
     value: 10,
-    increment() {
+    increment: function () {
         this.value++;
     },
-    decrement() {
+    decrement: function () {
         this.value--;
     },
-    reset() {
+    reset: function () {
         this.value = 0;
     },
 }
