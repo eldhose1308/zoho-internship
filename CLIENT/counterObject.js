@@ -4,6 +4,9 @@
 
 let counterObj = {
     value: 10,
+    increment_arrow: () => {
+        this.value++;
+    },
     increment: function () {
         this.value++;
     },
@@ -16,10 +19,16 @@ let counterObj = {
 }
 
 console.log(counterObj.value);
+
+counterObj.increment_arrow();
+console.log(counterObj.value);
+
 counterObj.increment();
 console.log(counterObj.value);
+
 counterObj.decrement();
 console.log(counterObj.value);
+
 counterObj.reset();
 console.log(counterObj.value);
 
