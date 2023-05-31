@@ -338,31 +338,35 @@
             const user_email = createForm.querySelector("#user_email").value;
             const user_mobile = createForm.querySelector("#user_mobile").value;
 
+            let validated = true;
             if (isEmpty(user_name)) {
                 setMessage("User Name should not be empty", false);
-                return false;
+                validated = false;
             }
-            if (isEmpty(user_email)) {
+            else if (isEmpty(user_email)) {
                 setMessage("User Email should not be empty", false);
-                return false;
+                validated = false;
             }
-            if (isEmpty(user_mobile)) {
+            else if (isEmpty(user_mobile)) {
                 setMessage("User Mobile should not be empty", false);
-                return false;
+                validated = false;
             }
-            if (isEmail(user_email)) {
+            else if (isEmail(user_email)) {
                 setMessage("User Email should be in the correct format", false);
-                return false;
+                validated = false;
             }
 
-            if (isNumeric(user_mobile)) {
+            else if (isNumeric(user_mobile)) {
                 setMessage("User Mobile should be only numbers", false);
-                return false;
+                validated = false;
             }
-            if (isExactLength(user_mobile, 10)) {
+            else if (isExactLength(user_mobile, 10)) {
                 setMessage("User Mobile should be of exactly 10 digits", false);
-                return false;
+                validated = false;
             }
+
+            if (!validated)
+                return false;
 
             const user_id = userDetails.length + 1;
             let user = {

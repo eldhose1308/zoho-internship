@@ -179,6 +179,13 @@
             height: 10px;
             border-radius: 4px;
         }
+
+        .search-box {
+            width: 30%;
+            float: right;
+            margin: 20px 0px;
+
+        }
     </style>
 
 </head>
@@ -292,6 +299,10 @@
             <div class="col-12">
 
                 <h3 class="heading center">Users List Details</h3>
+                <div class="form-group search-box">
+                    <label for="">Search : </label>
+                    <input type="search" class="form-element" name="search_value" id="search_value">
+                </div>
 
                 <table class="table">
                     <thead>
@@ -325,6 +336,7 @@
         };
 
 
+        const searchValue = document.getElementById("search_value");
         const createForm = document.getElementById("create-form");
         const submitBtn = document.getElementById("submit_btn");
         const alertMsg = document.getElementById("alert-msg");
@@ -335,12 +347,33 @@
         const usersList = document.getElementById("users-list");
 
 
+
         document.addEventListener("DOMContentLoaded", function () {
-            listUsers();
+            listUser();
         });
 
 
 
+
+
+        searchValue.addEventListener('keyup', function (e) {
+            const keyword = this.value.toLowerCase().trim();
+
+            let userRowText = '';
+            const usersRows = usersList.querySelectorAll('tr');
+
+            if (keyword.length == 0) {
+                usersRows.forEach(userRow => { userRow.style.display = 'table-row'; });
+                return;
+            }
+
+            usersRows.forEach(userRow => { userRow.style.display = 'none'; });
+            usersRows.forEach(userRow => {
+                userRowText = userRow.textContent.toLowerCase();
+                if (userRowText.includes(keyword))
+                    userRow.style.display = 'table-row';
+            });
+        });
 
 
         createForm.addEventListener('submit', async function (e) {
@@ -383,6 +416,7 @@
                 'user_mobile': user_mobile
             };
 
+
             const apiResponse = await axios(apiUrl + apiEndpoints.users, 'POST', user);
             if (apiResponse)
                 setMessage("User Saved", true);
@@ -392,7 +426,7 @@
 
             createForm.reset();
 
-            listUsers();
+            listUser();
         });
 
 
@@ -447,13 +481,13 @@
 
             updateForm.style.display = 'none';
 
-            listUsers();
+            listUser();
         });
 
 
 
 
-        async function listUsers() {
+        async function listUser() {
 
             userDetails = await axios(apiUrl + apiEndpoints.users);
             usersList.innerHTML = "";
@@ -512,7 +546,7 @@
                 setMessage("User Deleted", true);
             else
                 setMessage("User Could not be Deleted", false);
-            listUsers();
+            listUser();
         }
 
 

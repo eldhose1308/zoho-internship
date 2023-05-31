@@ -1,0 +1,308 @@
+* {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body {
+    background-color: #232b40;
+    color: #ddd;
+}
+
+.heading {
+    font-size: 28px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    padding: 1rem 7.5rem;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #111727;
+    margin: 1rem 0px;
+}
+
+.col-12 {
+    flex: 0 0 auto;
+    width: 80%;
+    padding: 0 4rem;
+    /* border: 1px solid #232b40; */
+}
+
+.col-6 {
+    flex: 0 0 auto;
+    width: 40%;
+    padding: 0 4rem;
+    border: 1px solid #232b40;
+}
+
+.form-element {
+    padding: 5px 10px;
+    font-size: 15px;
+    color: #000;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: inline-block;
+    width: 100%;
+    outline: none;
+    height: 28px;
+}
+
+select {
+    height: 40px !important;
+}
+
+input[type="file"] {
+    border: none;
+    color: #fff;
+}
+
+.form-group {
+    margin-bottom: 16px;
+    margin-right: 61px;
+
+}
+
+.form-check {
+    padding: 5px 10px;
+    display: inline-block;
+    height: 28px;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.btn {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 8px 40px;
+}
+
+.btn-success {
+    background-color: #24695c;
+    color: #fff;
+    border: 2px solid transparent;
+    outline: none;
+    border-radius: 5px;
+}
+
+.btn-outline-success {
+    border: 2px solid #24695c;
+    color: #fff;
+    background: transparent;
+    border-radius: 5px;
+}
+
+.btn-outline-success:hover {
+    background-color: #24695c;
+
+}
+
+.btn-success:hover {
+    border: 2px solid #24695c;
+    background: transparent;
+}
+
+
+.alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.alert-success {
+    color: #fff;
+    background-color: #24695c;
+    border-color: #24695c;
+}
+
+.alert-error {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    border-collapse: collapse;
+}
+
+.table td {
+    border: 1px solid #dee2e6;
+}
+
+.table thead {
+    background-color: #232b40;
+}
+
+.table td {
+    padding: .75rem;
+}
+
+.action-btn {
+    background-color: #f8f9fa;
+    border-color: #ddd;
+    color: #232b40;
+    text-align: center;
+    padding: .375rem .75rem;
+    cursor: pointer;
+    margin: 0px .75rem;
+}
+
+#loader {
+    width: 100%;
+    background: #24695c;
+    height: 10px;
+    border-radius: 4px;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+
+#entries_value {
+    height: 23px;
+    width: 10%;
+    background: #232b40;
+    border: none;
+    color: #fff;
+}
+
+#search_value {
+   
+    background: #232b40;
+    border: none;
+    color: #fff;
+}
+
+.entries {
+    margin: 20px 0px;
+}
+
+.search-box {
+    width: 30%;
+    float: right;
+    margin: 20px 0px;
+
+}
+
+.error-details {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    display: inline-block;
+    padding: .20rem 0px;
+}
+
+.error-details p {
+    color: #dc3545;
+    margin: 0px;
+}
+
+.action-btn-group {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+.offcanvas {
+    background-color: #232b40;
+    width: 55%;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    visibility: hidden;
+    transition: transform .3s ease-in-out;
+    transform: translateX(100%);
+    border-left: 2px solid #fff;
+}
+
+.offcanvas-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+}
+
+
+.offcanvas-content {
+    background: #111727;
+    padding: 2.8rem 3rem;
+    height: 100%;
+}
+
+.offcanvas-footer {
+    background: #232b40;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+}
+
+
+.close-offcanvas {
+    color: #fff;
+    background: #232b40;
+    border: none;
+}
+
+#progress {
+    display: none;
+    height: 0.7rem;
+    width: 100%;
+    background: #24695c;
+}
+
+
+.table-pagination {
+    text-align: right;
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination-item {
+    display: inline-block;
+}
+
+.pagination-item a {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #232b40;
+    color: #fff;
+    text-decoration: none;
+}
+
+.pagination-item a.active {
+    background-color: #ccc;
+    color: #111727;
+}
+.pagination-item a:hover {
+    background-color: #ccc;
+    color: #111727;
+}
+
+#pagination-info{
+    margin: 16px 0px;
+}
