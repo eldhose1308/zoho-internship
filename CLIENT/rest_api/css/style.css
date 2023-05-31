@@ -29,16 +29,16 @@ body {
 
 .col-12 {
     flex: 0 0 auto;
-    width: 80%;
+    width: 100%;
     padding: 0 4rem;
-    /* border: 1px solid #232b40; */
+    box-sizing: border-box;
 }
 
 .col-6 {
     flex: 0 0 auto;
     width: 40%;
     padding: 0 4rem;
-    border: 1px solid #232b40;
+    box-sizing: border-box;
 }
 
 .form-element {
@@ -130,6 +130,15 @@ label {
     color: #fff;
     background-color: #dc3545;
     border-color: #dc3545;
+}
+
+
+.close-alert{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 21px;
 }
 
 .table {

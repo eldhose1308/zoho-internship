@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+
 pagination.addEventListener('click', function (e) {
     e.preventDefault();
     if (e.target.tagName == 'UL')
@@ -465,11 +466,20 @@ function setMessage(message = '', status = true) {
     alertMsg.classList = '';
     alertMsg.classList.add('alert');
     alertMsg.classList.add('alert-' + alertStatus);
-    alertMsg.textContent = message;
+    alertMsg.innerHTML = message + `<button onclick="closeAlert(this)" class="close-alert float-right">&times</button>`;
+    alertMsg.style.display = "block";
 
     scrollToTop();
 
 }
+
+
+
+function closeAlert($this) {
+    $this.parentElement.style.display = "none"
+}
+
+
 
 function isEmpty(value) {
     if (value == '' || value.length == 0)
